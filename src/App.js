@@ -15,10 +15,10 @@ function App() {
   const onSignup = (data) => {
     Axios.post("/profiles/signup", data)
       .then((respone) => {
-        console.log(respone);
+        // console.log(respone);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
