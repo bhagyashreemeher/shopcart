@@ -7,7 +7,7 @@ import AlertMessage from "./Alert";
 function App() {
   const [isRegister, setIsRegister] = useState(false);
   const { register, handleSubmit, errors, reset } = useForm();
-  const [loading, isLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   const {
@@ -18,7 +18,7 @@ function App() {
   } = useForm();
 
   const onSignup = (data) => {
-    isLoading(true);
+    setIsLoading(true);
     setError("");
     Axios.post("/profiles/signup", data)
       .then((respone) => {})
