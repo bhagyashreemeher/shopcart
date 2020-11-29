@@ -2,23 +2,28 @@ import "./App.css";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Axios } from "./constant";
+import AlertMessage from "./Alert";
 
 function App() {
   const [isRegister, setIsRegister] = useState(false);
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, reset } = useForm();
+  const [loading, isLoading] = useState(false);
+  const [error, setError] = useState("");
+
   const {
     register: registerSignin,
     handleSubmit: handleSigninSubmit,
     errors: signinerrors,
+    reset: signinreset,
   } = useForm();
 
   const onSignup = (data) => {
+    isLoading(true);
+    setError("");
     Axios.post("/profiles/signup", data)
-      .then((respone) => {
-        console.log(respone);
-      })
+      .then((respone) => {})
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   };
 
@@ -36,6 +41,7 @@ function App() {
     <div className={"container-sign " + (isRegister ? "sign-up-mode" : "")}>
       <div className="forms-container">
         <div className="signin-signup">
+          {/* <AlertMessage /> */}
           {!isRegister ? (
             <form
               onSubmit={handleSigninSubmit(onSignin)}
@@ -284,7 +290,11 @@ function App() {
             <button
               className="btn transparent"
               id="sign-up-btn"
-              onClick={() => setIsRegister(true)}
+              onClick={() => {
+                reset();
+                signinreset();
+                setIsRegister(true);
+              }}
             >
               Register
             </button>
@@ -302,7 +312,11 @@ function App() {
             <button
               className="btn transparent"
               id="sign-in-btn"
-              onClick={() => setIsRegister(false)}
+              onClick={() => {
+                signinreset();
+                reset();
+                setIsRegister(false);
+              }}
             >
               LogIn
             </button>
