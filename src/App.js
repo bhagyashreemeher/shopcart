@@ -33,7 +33,8 @@ function App() {
         console.log(respone);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error.response.data.errors);
+        setError(error.response.data.errors)
       });
   };
 
@@ -110,6 +111,7 @@ function App() {
                   </div>
                 </div>
               </div>
+              <small className="text-danger">{error}</small>
               <input type="submit" value="Login" className="btn solid" />
             </form>
           ) : (
