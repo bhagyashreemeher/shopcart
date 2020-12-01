@@ -2,7 +2,6 @@ import "./App.css";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Axios } from "./constant";
-import AlertMessage from "./Alert";
 
 function App() {
   const [isRegister, setIsRegister] = useState(false);
