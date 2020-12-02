@@ -295,6 +295,7 @@ function App() {
               onClick={() => {
                 reset();
                 signinreset();
+                setError('')
                 setIsRegister(true);
               }}
             >
