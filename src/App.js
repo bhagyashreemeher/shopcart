@@ -5,7 +5,7 @@ import { Axios } from "./constant";
 
 function App() {
   const [isRegister, setIsRegister] = useState(false);
-  const { register, handleSubmit, errors, reset } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [signinErrorMessage, signinSetErrorMessage] = useState("");
@@ -14,7 +14,6 @@ function App() {
     register: registerSignin,
     handleSubmit: handleSigninSubmit,
     errors: signinerrors,
-    reset: signinreset,
   } = useForm();
 
   const onSignup = (data) => {
@@ -26,7 +25,6 @@ function App() {
       })
       .catch((error) => {
         setErrorMessage(error.response.data.errors);
-        // console.log(error.response.data.errors);
       });
   };
 
@@ -39,7 +37,6 @@ function App() {
       })
       .catch((error) => {
         signinSetErrorMessage(error.response.data.errors);
-        // console.log(error.response.data.errors)
       });
   };
 
