@@ -7,7 +7,8 @@ function App() {
   const [isRegister, setIsRegister] = useState(false);
   const { register, handleSubmit, errors, reset } = useForm();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [signinErrorMessage, signinSetErrorMessage] = useState("");
 
   const {
     register: registerSignin,
@@ -18,22 +19,27 @@ function App() {
 
   const onSignup = (data) => {
     setIsLoading(true);
-    setError("");
+    setErrorMessage("");
     Axios.post("/profiles/signup", data)
-      .then((respone) => {})
+      .then((respone) => {
+        console.log(respone);
+      })
       .catch((error) => {
-        console.log(error.response);
+        setErrorMessage(error.response.data.errors);
+        // console.log(error.response.data.errors);
       });
   };
 
   const onSignin = (data) => {
+    setIsLoading(true);
+    signinSetErrorMessage(false);
     Axios.post("/profiles/signin", data)
       .then((respone) => {
         console.log(respone);
       })
       .catch((error) => {
-        // console.log(error.response.data.errors);
-        setError(error.response.data.errors);
+        signinSetErrorMessage(error.response.data.errors);
+        // console.log(error.response.data.errors)
       });
   };
 
@@ -110,7 +116,9 @@ function App() {
                   </div>
                 </div>
               </div>
-              <small className="text-danger">{error}</small>
+              <small className="text-danger text-center">
+                {signinErrorMessage}
+              </small>
               <input type="submit" value="Login" className="btn solid" />
             </form>
           ) : (
@@ -277,7 +285,7 @@ function App() {
                   </div>
                 </div>
               </div>
-              <small className="text-danger">{error}</small>
+              <small className="text-danger text-center"> {errorMessage}</small>
               <input type="submit" className="btn solid" value="Register" />
             </form>
           )}
@@ -293,10 +301,8 @@ function App() {
               className="btn transparent"
               id="sign-up-btn"
               onClick={() => {
-                reset();
-                signinreset();
-                setError('')
                 setIsRegister(true);
+                signinSetErrorMessage("");
               }}
             >
               Register
@@ -316,9 +322,8 @@ function App() {
               className="btn transparent"
               id="sign-in-btn"
               onClick={() => {
-                signinreset();
-                reset();
                 setIsRegister(false);
+                setErrorMessage("");
               }}
             >
               LogIn
