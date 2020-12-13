@@ -1,6 +1,26 @@
 import React from "react";
+import "./App.css";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Axios } from "./constant";
 
 function Register() {
+  const { register, handleSubmit, errors } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const onSignup = (data) => {
+    setIsLoading(true);
+    setErrorMessage("");
+    Axios.post("/profiles/signup", data)
+      .then((respone) => {
+        console.log(respone);
+      })
+      .catch((error) => {
+        setErrorMessage(error.response.data.errors);
+      });
+  };
+
   return (
     <form onSubmit={handleSubmit(onSignup)} className="sign-up-form">
       <h3 className="title">Register</h3>
