@@ -5,16 +5,10 @@ import { useForm } from "react-hook-form";
 import { Axios } from "./constant";
 
 function Login() {
-    
-  const [isRegister, setIsRegister] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [signinErrorMessage, signinSetErrorMessage] = useState("");
 
-  const {
-    register: registerSignin,
-    handleSubmit: handleSigninSubmit,
-    errors: signinerrors,
-  } = useForm();
+  const { register, handleSubmit, errors  } = useForm();
 
   const onSignin = (data) => {
     setIsLoading(true);
@@ -29,7 +23,7 @@ function Login() {
   };
 
   return (
-    <form onSubmit={handleSigninSubmit(onSignin)} className="sign-in-form">
+    <form onSubmit={handleSubmit(onSignin)} className="sign-in-form">
       <h3 className="title">Login</h3>
       <div className="form-row">
         <div className="row justify-content-center">
@@ -43,17 +37,17 @@ function Login() {
               <input
                 type="email"
                 className={
-                  "form-control " + (signinerrors.email ? "is-invalid" : "")
+                  "form-control " + (errors.email ? "is-invalid" : "")
                 }
                 id="email"
                 name="email"
                 placeholder="email"
-                ref={registerSignin({
+                ref={register({
                   required: true,
                 })}
               />
               <small className="invalid-feedback">
-                {signinerrors.email?.type === "required" &&
+                {errors.email?.type === "required" &&
                   "Your email is required"}
               </small>
             </div>
@@ -68,23 +62,23 @@ function Login() {
               <input
                 type="password"
                 className={
-                  "form-control " + (signinerrors.password ? "is-invalid" : "")
+                  "form-control " + (errors.password ? "is-invalid" : "")
                 }
                 id="password"
                 name="password"
                 placeholder="password"
-                ref={registerSignin({
+                ref={register({
                   required: true,
                   maxLength: 15,
                   minLength: 5,
                 })}
               />
               <small className="invalid-feedback">
-                {signinerrors.password?.type === "required" &&
+                {errors.password?.type === "required" &&
                   "Your password is required"}
-                {signinerrors.password?.type === "minLength" &&
+                {errors.password?.type === "minLength" &&
                   "min length of password should be 5"}
-                {signinerrors.password?.type === "maxLength" &&
+                {errors.password?.type === "maxLength" &&
                   "max length of password should be 15"}
               </small>
             </div>
