@@ -6,11 +6,9 @@ import { Axios } from "./constant";
 
 function Register() {
   const { register, handleSubmit, errors } = useForm();
-  const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const onSignup = (data) => {
-    setIsLoading(true);
     setErrorMessage("");
     Axios.post("/profiles/signup", data)
       .then((respone) => {
