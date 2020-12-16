@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Axios } from "./constant";
