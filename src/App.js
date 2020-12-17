@@ -24,7 +24,6 @@ function App() {
               id="sign-up-btn"
               onClick={() => {
                 setIsRegister(true);
-                signinSetErrorMessage("");
               }}
             >
               Register
@@ -45,7 +44,6 @@ function App() {
               id="sign-in-btn"
               onClick={() => {
                 setIsRegister(false);
-                setErrorMessage("");
               }}
             >
               LogIn
