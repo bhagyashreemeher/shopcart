@@ -2,6 +2,9 @@ import "./App.css";
 import { useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
+import React from "react";
+import Home from "./Home";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
   const [isRegister, setIsRegister] = useState(false);
